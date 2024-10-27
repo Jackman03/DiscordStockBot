@@ -16,13 +16,13 @@ def GetCurrentPrice(Ticker):
             change = texts.find('fin-streamer', {'data-field': 'regularMarketChangePercent'}).text
             return price, change
         except AttributeError:
-            print("Failed to locate stock price or change data. Website structure may have changed.")
+            return -2
 
     #404 error indicates page not found. So in our case it would likely be invalid ticker 
     elif r.status_code == 404:
-        print("Invalid ticker. Please try again")
+        return -1
     else:
-        print("Web error: ",r.status_code)
+        return -3, r.status_code
 
 
 
