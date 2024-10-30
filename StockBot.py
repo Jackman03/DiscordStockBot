@@ -27,11 +27,21 @@ async def on_ready():
     print("Bot is loaded")
 
 #Command to see if market is open
-#@client.command()
-#async def Market():
- #   print(f"The US stock exchange is ")
+@client.command()
+async def Market(ctx):
+    Curtime = datetime.now().time()
+    CurDay = datetime.now().weekday()
+    print(CurDay)
+    MarketOpen = datetime.strptime("9:30:00","%H:%M:%S").time()
+    MarketClose = datetime.strptime("16:00:00","%H:%M:%S").time()
 
-#COmmand the get the current price and change of stock
+    #So we sitll need to figure out about weekend data...
+    if Curtime >= MarketOpen and Curtime <= MarketClose and CurDay not in [5,6]:
+        await ctx.send("The US stock exchange is open")
+    else:
+        await ctx.send("The US stock exchange is closed")
+        
+#Command the get the current price and change of stock
 @client.command()
 async def Price(ctx, ticker: str):
     Curtime = datetime.now()
@@ -63,8 +73,7 @@ async def About(ctx):
     await ctx.send("Discord Stock Bot")
     await ctx.send("Created by Jacman03")
     await ctx.send("https://github.com/Jackman03")
-
-
+    await ctx.send("Discord bot to return current stock data")
 
 Configure()
 client.run(os.getenv('DiscordKey'))

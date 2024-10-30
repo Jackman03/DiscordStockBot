@@ -23,15 +23,3 @@ def GetCurrentPrice(Ticker):
         return -1
     else:
         return -3, r.status_code
-
-
-
-
-
-Stock = 'VOO'
-#Yahoo works better when we use all caps
-Curtime = datetime.now()
-Curtime = Curtime.strftime("%H:%M:%S")
-CurPrice = GetCurrentPrice(Stock)
-
-print(f"{CurPrice[0]} at {Curtime}")
