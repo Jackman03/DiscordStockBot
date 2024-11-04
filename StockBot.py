@@ -7,7 +7,6 @@ from discord.ext import commands
 import os
 from dotenv import load_dotenv
 from GetStockData import *
-import requests
 
 def Configure():
     load_dotenv()
@@ -60,11 +59,11 @@ async def Price(ctx, ticker: str):
             await ctx.send(f"{StockData[0]} at {Curtime} with a change of {StockData[1]}")
 
 
-#command that list all the commands
+#Command that list all the commands
 @client.command()
 async def Help(ctx):
     await ctx.send("Price  ticker - Returns the current price and change of a stock at the current time")
-    await ctx.send("WIP Market - Returns a if the US stock market is open")
+    await ctx.send("Market - Returns if the US stock market is open")
     await ctx.send("Help - Returns all of the commands")
     await ctx.send("About - Returns the project info")
 
