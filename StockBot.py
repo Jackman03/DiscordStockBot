@@ -1,7 +1,5 @@
-#todo
-#function that states if the market is open
-#function that gets the average change at market close and open (dow jones?)s
-#Crypto maybe?
+#Discord stock bot
+#Version 1.0
 import discord
 import datetime as dt
 from discord.ext import commands
