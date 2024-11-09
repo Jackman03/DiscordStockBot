@@ -1,6 +1,7 @@
 #todo
 #function that states if the market is open
 #function that gets the average change at market close and open (dow jones?)s
+#Crypto maybe?
 import discord
 import datetime as dt
 from discord.ext import commands
@@ -73,6 +74,16 @@ async def About(ctx):
     await ctx.send("Created by Jacman03")
     await ctx.send("https://github.com/Jackman03")
     await ctx.send("Discord bot to return current stock data")
+
+@client.event
+async def on_command_error(ctx,error):
+    if isinstance(error,commands.CommandNotFound):
+        await ctx.send("Sorry, I don't recognize that command. Type `$Help` for a list of available commands.")
+    elif isinstance(error,commands.MissingRequiredArgument):
+        await ctx.send(f"Missing arguments for the command. Please provide all necessary parameters.")
+    else:
+        await ctx.send(f"An error occured: {str(error)}")
+
 
 Configure()
 client.run(os.getenv('DiscordKey'))
