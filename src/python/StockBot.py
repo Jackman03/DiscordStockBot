@@ -1,7 +1,7 @@
 #Discord stock bot
 #Version 1.0
 import discord
-import datetime as dt
+from datetime import datetime
 from discord.ext import commands
 import os
 from dotenv import load_dotenv
@@ -45,17 +45,10 @@ async def Price(ctx, ticker: str):
     Curtime = datetime.now()
     Curtime = Curtime.strftime("%H:%M:%S")
     StockData = GetCurrentPrice(ticker)
-    match StockData:
-        case -1:
-             await ctx.send("Invalid Ticker")
-
-        case -2:
-            await ctx.send("Failed to locate stock price or change data. Website structure may have changed.")
-        case -3:
-            await ctx.send(f"Web error {StockData[1]}")
     
-        case _:
-            await ctx.send(f"{StockData[0]} at {Curtime} with a change of {StockData[1]}")
+    print(StockData[0][0])
+    await ctx.send(f'{ticker} {StockData[0][0]} at {Curtime}')
+   
 
 
 #Command that list all the commands
