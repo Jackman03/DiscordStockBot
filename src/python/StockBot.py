@@ -45,12 +45,16 @@ async def Price(ctx, ticker: str):
     Curtime = datetime.now()
     Curtime = Curtime.strftime("%H:%M:%S")
     StockData = GetCurrentPrice(ticker)
+    print(StockData)
+
+    match StockData[1][0]:
+        case 404:
+            await ctx.send('Invalid ticker')
+        case 200:
+            await ctx.send(f'{ticker} {StockData[0][0]} at {Curtime}')
+        case _:
+            await ctx.send(f'A web error occured: {StockData[0][2]}')
     
-    print(StockData[0][0])
-    await ctx.send(f'{ticker} {StockData[0][0]} at {Curtime}')
-   
-
-
 #Command that list all the commands
 @client.command()
 async def Help(ctx):
